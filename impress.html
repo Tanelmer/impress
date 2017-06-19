@@ -1,0 +1,163 @@
+<!doctype html>
+<html>
+<head>
+    <title>darren - Impress demo</title>
+    <meta charset="utf-8" />
+    <link href="inpress-demo.css" rel="stylesheet" type="text/css"/>
+    <style>
+
+    </style>
+</head>
+<body>
+<div class="impress-not-supported">
+    <div class="fallback-message">
+        <p>你的浏览器<b>不支持</b> impress.js, 所以当前展示的是简化版。</p>
+        <p>为了获得更好的体验，请使用最新的 <b>Chrome</b>, <b>Safari</b> 或者 <b>Firefox</b> 浏览器。</p>
+    </div>
+</div>
+<div id="impress">
+    <div class="step" data-x="0" data-y="0">
+        <p>vue-cli基于webpack模板生成的项目配置文件详解</p>
+        <p style="text-align: right"><i style="font-size: 20px">—— BW</i></p>
+    </div>
+    <div class="step" data-x="1700" data-y="0">
+        <h6>文件目录</h6>
+        <fieldset style="font-size: 20px;font-family: 'Open Sans', Arial, sans-serif;">
+            ├─build<br>
+            │   ├─build.js<br>
+            │   ├─check-versions.js<br>
+            │   ├─dev-client.js<br>
+            │   ├─dev-server.js<br>
+            │   ├─utils.js<br>
+            │   ├─vue-loader.conf.js<br>
+            │   ├─webpack.base.conf.js<br>
+            │   ├─webpack.dev.conf.js<br>
+            │   ├─webpack.prod.conf.js<br>
+            ├─config<br>
+            │   ├─dev.env.js<br>
+            │   ├─index.js<br>
+            │   ├─prod.env.js<br>
+            │   └─test.env.js<br>
+            ├─...<br>
+            └─package.json
+        </fieldset>
+    </div>
+    <div class="step" data-x="1600" data-y="1000">
+        <h6>build文件夹下</h6>
+        <div >
+            <ul style="font-size: 24px">
+                <li>
+                    build.js主要做的几件事情
+                    <p>
+                        1. loading动画（载入）
+                    </p>
+                    <p>
+                        2. 删除创建目标文件夹
+                    </p>
+                    <p>
+                        3. webpack编译
+                    </p>
+                    <p>
+                        4. 输出信息
+                    </p>
+                </li>
+            </ul>
+        </div>
+        <hr>
+        <div >
+            <ul style="font-size: 24px">
+                <li>
+                    dev-server.js主要做的几件事情
+                    <p>
+                        1. 检查node和npm的版本
+                    </p>
+                    <p>
+                        2. 引入相关插件和配置
+                    </p>
+                    <p>
+                        3. 创建express服务器和webpack编译器
+                    </p>
+                    <p>
+                        4. 配置开发中间件（webpack-dev-middleware）和热重载中间件（webpack-hot-middleware）
+                    </p>
+                    <p>
+                        5. 挂载代理服务和中间件
+                    </p>
+                    <p>
+                        6. 配置静态资源
+                    </p>
+                    <p>
+                        7. 启动服务器监听特定端口（8080）
+                    </p>
+                    <p>
+                        8. 自动打开浏览器并打开特定网址（localhost:8080）
+                    </p>
+                    </li>
+            </ul>
+        </div>
+        <hr>
+        <div>
+            <ul style="font-size: 24px">
+                <li>
+                    webpack配置主要是下面的三个文件，
+                    第一个是基础文件，后面两个可以理解为基于第一个文件定制版
+                    <p>
+                        1. webpack.base.conf.js
+                    </p>
+                    <p>
+                        2. webpack.dev.conf.js
+                    </p>
+                    <p>
+                        3. webpack.prod.conf.js
+                    </p>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="step" data-x="500" data-y="1000" data-scale="0.5">
+        <h6>config文件夹下</h6>
+        <div style="font-size: 24px">
+            主要是index.js<br>
+            代码上看是切换环境的配置<br>
+            实际上好像也是，在webpack的配置中很多值是从这边取的<br>
+            代码：
+            <div style="font-size: 20px">
+
+                <p >module.exports = {</p>
+                <p style="padding-left: 10px">build: {</p>
+                    <p style="padding-left: 20px">
+                        env: require('./prod.env'),<br>
+                        index: path.resolve(__dirname, '../dist/index.html'),<br>
+                        assetsRoot: path.resolve(__dirname, '../dist'),<br>
+                        assetsSubDirectory: 'static',<br>
+                        assetsPublicPath: '/',<br>
+                        productionSourceMap: true,<br>
+                        productionGzip: false,<br>
+                        productionGzipExtensions: ['js', 'css'],<br>
+                        // Run the build command with an extra argument to<br>
+                        // View the bundle analyzer report after build finishes:<br>
+                        // `npm run build --report`<br>
+                        // Set to `true` or `false` to always turn it on or off<br>
+                        bundleAnalyzerReport: process.env.npm_config_report<br>
+                    </p>
+                    <p style="padding-left: 10px">}</p>
+                <p >}</p>
+            </div>
+
+        </div>
+    </div>
+    <div class="step" data-x="-1000" data-y="-1000" data-rotate-z="90" data-scale="2">
+        <h6>总结</h6>
+        <p style="font-size: 24px;">
+            1、webpack入了个门,还有很多插件没玩过，还有一些高级功能和配置也不是特别清楚<br>
+            2、注释太多，官网基本都有~<br>
+            3、按照vue&webpack官网教程过来，demo写是最简单的，没踩什么坑，心里有点不踏实。
+        </p>
+    </div>
+    <!-- darren code -->
+    <div id="overview" class="step" data-x="500" data-y="500" data-scale="3"></div>
+</div>
+<script src="impress.js"></script>
+<script>impress().init();</script>
+</body>
+</html>
